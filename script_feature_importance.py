@@ -34,11 +34,11 @@ n_obs = len(obs)
 e = shap.DeepExplainer(
         agent.network, 
         torch.from_numpy(
-            obs[np.random.choice(np.arange(len(obs)), 1000, replace=False)]
+            obs[np.random.choice(np.arange(len(obs)), 100, replace=False)]
         ).type(torch.FloatTensor).to(DEVICE))
 
 shap_values = e.shap_values(
-    torch.from_numpy(obs[np.random.choice(np.arange(len(obs)), 300, replace=False)]).type(torch.FloatTensor).to(DEVICE)
+    torch.from_numpy(obs[np.random.choice(np.arange(len(obs)), 30, replace=False)]).type(torch.FloatTensor).to(DEVICE)
 )
 
 s = np.stack([np.sum(s, axis=0) for s in shap_values])
