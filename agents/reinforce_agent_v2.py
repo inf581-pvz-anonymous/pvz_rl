@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 # from .evaluate_agent import evaluate
 # from .threshold import Threshold
 
-HP_NORM = 1
+HP_NORM = 100
 SUN_NORM = 200
 
 class PolicyNetV2(nn.Module):
@@ -26,7 +26,7 @@ class PolicyNetV2(nn.Module):
         x = self.fc2(x)
         return F.log_softmax(x)
 
-class ReinforceAgentV2():
+class DiscreteAgentV2():
     def __init__(self,input_size, possible_actions):
         self._grid_size = config.N_LANES * config.LANE_LENGTH
         self.possible_actions = possible_actions
@@ -35,11 +35,12 @@ class ReinforceAgentV2():
         self.n_plants = 4
 
     def decide_action(self, observation):
-        # mask = self._get_mask(observation)
+        mask = self._get_mask(observation)
         # predict probabilities for actions
         var_s = Variable(torch.from_numpy(observation.astype(np.float32)))
         action_prob = torch.exp(self.policy.forward(var_s))
-        # action_prob /= torch.sum(action_prob[mask])
+        action_prob[np.logical_not(mask)] = 0
+        action_prob /= torch.sum(action_prob[mask])
         # select random action weighted by probabilities
         action =  np.random.choice(self.possible_actions, 1, p=action_prob.data.numpy())[0]
         return action
@@ -80,7 +81,7 @@ class ReinforceAgentV2():
             A_var = Variable(torch.from_numpy(reward_batch.astype(np.float32)))
             
             pred = self.policy.forward(s_var)
-            # pred = pred / torch.Tensor([torch.sum(pred[i,:][mask_batch[i,:]]) for i in range(len(pred))]).view(-1,1)
+            pred = pred / torch.Tensor([torch.sum(pred[i,:][mask_batch[i,:]]) for i in range(len(pred))]).view(-1,1)
             
             loss += F.nll_loss(pred * A_var,a_var)
 
@@ -109,7 +110,7 @@ class ReinforceAgentV2():
 
 
 
-class PlayerV2():
+class TrainerV2():
     def __init__(self,render=True, max_frames = 1000, n_iter = 100000):
         self.env = gym.make('gym_pvz:pvz-env-v2')
         self.max_frames = max_frames
@@ -181,7 +182,7 @@ class PlayerV2():
 if __name__ == "__main__":
 
     env = TrainerV2(render=False,max_frames = 1000)
-    agent = ReinforceAgentV2(
+    agent = DiscreteAgentV2(
         input_size=env.num_observations(),
         possible_actions=env.get_actions()
     )
