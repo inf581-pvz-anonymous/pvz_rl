@@ -87,17 +87,7 @@ if __name__ == "__main__":
         input_size = env.num_observations(),
         possible_actions=env.get_actions()
     )
-    # agent = DiscreteAgentV2(
-    #     n_plants=len(env.env.plant_deck),
-    #     possible_actions = env.get_actions()
-    # )
-    # agent.load_lane("agents/benchmark/dd2.3_three")
-    # agent.load("agents/benchmark/da2_h_50") 
-    # agent.freeze_lane()
     # agent.policy = torch.load("saved/policy13_v2")
-    #threshold = Threshold(seq_length = n_iter, start_epsilon=0.1,
-    #                      end_epsilon=0.0,interpolation='sinusoidal',
-    #                      periods=np.floor(n_iter/(8*n_record)))
     
     train(env, agent)
 
