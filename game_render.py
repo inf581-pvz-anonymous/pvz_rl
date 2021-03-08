@@ -1,7 +1,6 @@
-from agents.discrete_agent_v2 import DiscreteAgentV2, PolicyNetV2, TrainerV2
-
-from agents.keyboard_agent import KeyboardAgent
-from agents.ddqn_agent import QNetwork
+from agents import ReinforceAgentV2, PolicyNetV2, PlayerV2
+from agents import KeyboardAgent
+from agents import PlayerQ, QNetwork, QNetwork_DDQN
 from pvz import config
 import gym
 import torch
@@ -113,10 +112,6 @@ def render(render_info):
         pygame.display.flip()
 
     pygame.quit()
-
-
-from agents.discrete_agent_v2_1 import DiscreteAgentV2_1, TrainerV2_1
-from agents.ddqn_agent import QNetwork, PlayerQ
 
 if __name__ == "__main__":
     # env = TrainerV2(render=False, max_frames = 500 * config.FPS)
