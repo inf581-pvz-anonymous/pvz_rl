@@ -12,6 +12,10 @@ from . import evaluate
 HP_NORM = 1
 SUN_NORM = 200
 
+def sum_onehot(grid):
+    return torch.cat([torch.sum(grid==(i+1), axis=-1).unsqueeze(-1) for i in range(4)], axis=-1)
+
+
 class QNetwork(nn.Module):
     
     def __init__(self, env, epsilon=0.05, learning_rate=1e-3, device='cpu', use_zombienet=True, use_gridnet=True):
@@ -23,7 +27,6 @@ class QNetwork(nn.Module):
         self.actions = np.arange(env.action_space.n)
         self.learning_rate = learning_rate
         self._grid_size = config.N_LANES * config.LANE_LENGTH
-
 
         # TODO
         self.use_zombienet = use_zombienet
@@ -55,10 +58,7 @@ class QNetwork(nn.Module):
     def decide_action(self, state, mask, epsilon):
         # mask = self.env.mask_available_actions()
         if np.random.random() < epsilon:
-            if np.random.random() < 0:
-                action = 0
-            else:
-                action = np.random.choice(self.actions[mask])
+            action = np.random.choice(self.actions[mask])
         else:
             action = self.get_greedy_action(state, mask)
         return action
@@ -68,7 +68,7 @@ class QNetwork(nn.Module):
         qvals[np.logical_not(mask)] = qvals.min()
         return torch.max(qvals, dim=-1)[1].item()
 
-    def get_qvals(self, state):
+    def get_qvals(self, state, use_zombienet=True):
         if type(state) is tuple:
             state = np.array([np.ravel(s) for s in state])
             state_t = torch.FloatTensor(state).to(device=self.device)
@@ -93,6 +93,7 @@ class QNetwork(nn.Module):
                 plant_grid = self.gridnet(plant_grid)
             state_t = torch.cat([plant_grid, zombie_grid, state_t[2 * self._grid_size:]])
         return self.network(state_t)
+
 
 class ZombieNet(nn.Module):
     def __init__(self, output_size=1, hidden_size=5):
@@ -119,7 +120,7 @@ class DDQNAgent:
         # self.threshold = Threshold(seq_length = 100000, start_epsilon=1.0,
         #                   end_epsilon=0.2,interpolation='sinusoidal',
         #                   periods=np.floor(n_iter/100))
-        self.threshold = Threshold(seq_length = n_iter, start_epsilon=1.0, interpolation="exponential",
+        self.threshold = Threshold(seq_length = 100000, start_epsilon=1.0, interpolation="exponential",
                            end_epsilon=0.05)
         self.epsilon = 0
         self.batch_size = batch_size
@@ -228,6 +229,8 @@ class DDQNAgent:
                     
 
     def calculate_loss(self, batch):
+        full_mask = np.full(self.env.action_space.n, True)
+
         states, actions, rewards, dones, next_states = [i for i in batch]
         rewards_t = torch.FloatTensor(rewards).to(device=self.network.device).reshape(-1,1)
         actions_t = torch.LongTensor(np.array(actions)).reshape(-1,1).to(
@@ -400,4 +403,3 @@ class PlayerQ():
 
     def get_render_info(self):
         return self.env._scene._render_info
-    
