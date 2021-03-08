@@ -7,7 +7,7 @@ from torch.nn.utils.weight_norm import weight_norm
 import shap
 import numpy as np
 
-from agents.ddqn_agent import QNetwork, PlayerQ
+from agents import QNetwork, PlayerQ
 from pvz import config
 
 n_ep = 100
