@@ -26,7 +26,7 @@ class PolicyNetV2(nn.Module):
         x = self.fc2(x)
         return F.log_softmax(x)
 
-class DiscreteAgentV2():
+class ReinforceAgentV2():
     def __init__(self,input_size, possible_actions):
         self._grid_size = config.N_LANES * config.LANE_LENGTH
         self.possible_actions = possible_actions
@@ -110,7 +110,7 @@ class DiscreteAgentV2():
 
 
 
-class TrainerV2():
+class PlayerV2():
     def __init__(self,render=True, max_frames = 1000, n_iter = 100000):
         self.env = gym.make('gym_pvz:pvz-env-v2')
         self.max_frames = max_frames
@@ -181,7 +181,7 @@ class TrainerV2():
 
 if __name__ == "__main__":
 
-    env = TrainerV2(render=False,max_frames = 1000)
+    env = PlayerV2(render=False,max_frames = 1000)
     agent = DiscreteAgentV2(
         input_size=env.num_observations(),
         possible_actions=env.get_actions()
