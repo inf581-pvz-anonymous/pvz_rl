@@ -1,5 +1,5 @@
 import gym
-from agents.ddqn_agent import experienceReplayBuffer, DDQNAgent, QNetwork
+from agents import experienceReplayBuffer, DDQNAgent, QNetwork
 import torch
 from agents import evaluate
 from copy import deepcopy
