@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 from agents import evaluate, PlayerV2, ReinforceAgentV2
 from agents import QNetwork, PlayerQ
-form agents import QNetwork_DQN
+from agents import QNetwork_DQN
 
 if __name__=="__main__":
 #     player = TrainerV2(render=False, max_frames = 400)
