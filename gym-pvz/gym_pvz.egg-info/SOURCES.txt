@@ -1,0 +1,6 @@
+setup.py
+gym_pvz.egg-info/PKG-INFO
+gym_pvz.egg-info/SOURCES.txt
+gym_pvz.egg-info/dependency_links.txt
+gym_pvz.egg-info/requires.txt
+gym_pvz.egg-info/top_level.txt
