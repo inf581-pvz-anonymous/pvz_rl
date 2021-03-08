@@ -14,7 +14,7 @@ n_ep = 100
 obs = []
 
 DEVICE = "cpu"
-agent = torch.load("agents/benchmark/dfq5_epsexp").to(DEVICE)
+agent = torch.load("agents/agent_zoo/dfq5_epsexp").to(DEVICE)
 player = PlayerQ(render=False)
 
 for episode_idx in range(n_ep):
