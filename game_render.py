@@ -1,6 +1,6 @@
 from agents import ReinforceAgentV2, PolicyNetV2, PlayerV2
 from agents import KeyboardAgent
-from agents import PlayerQ, QNetwork, QNetwork_DDQN
+from agents import PlayerQ, QNetwork, QNetwork_DQN
 from pvz import config
 import gym
 import torch
