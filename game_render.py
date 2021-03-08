@@ -113,21 +113,26 @@ def render(render_info):
 
     pygame.quit()
 
+agent_type = "DDQN" # DDQN or Reinforce or Keyboard
+
+
 if __name__ == "__main__":
-    # env = TrainerV2(render=False, max_frames = 500 * config.FPS)
-    # agent = DiscreteAgentV2(
-    #          input_size=env.num_observations(),
-    #          possible_actions=env.get_actions()
-    # )
-    # agent.load("dfp")
-    # agent = DiscreteAgentV2_1(
-    #          n_plants=4,
-    #          possible_actions=env.get_actions()
-    # )
-    # PolicyNet=PolicyNetV2
-    env = PlayerQ(render=False)
-    agent = torch.load("agents/benchmark/dfq5_epsexp")
-    # agent = KeyboardAgent()
+
+    if agent_type == "Reinforce":
+        env = PlayerV2(render=False, max_frames = 500 * config.FPS)
+        agent = ReinforceAgentV2(
+                input_size=env.num_observations(),
+                possible_actions=env.get_actions()
+        )
+        agent.load("agents/agent_zoo/dfp5")
+        
+    if agent_type == "DDQN":
+        env = PlayerQ(render=False)
+        agent = torch.load("agents/agent_zoo/dfq5_epsexp")
+    
+    if agent_type == "Keyboard":
+        env = PlayerV2(render=True, max_frames = 500*config.FPS)
+        agent = KeyboardAgent()
     env.play(agent)
     render_info = env.get_render_info()
     render(render_info)
