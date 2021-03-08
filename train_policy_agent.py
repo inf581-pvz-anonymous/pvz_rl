@@ -83,7 +83,7 @@ def train(env, agent, n_iter=100000, n_record=500, n_save=1000, n_evaluate=10000
 if __name__ == "__main__":
 
     env = PlayerV2(render=False,max_frames = 400)
-    agent = DiscreteAgentV2(
+    agent = ReinforceAgentV2(
         input_size = env.num_observations(),
         possible_actions=env.get_actions()
     )
