@@ -12,6 +12,11 @@ from pvz import config
 import matplotlib.pyplot as plt
 
 
+# Import your agent
+
+from agents import ReinforceAgentV2, PlayerV2
+
+
 def train(env, agent, n_iter=100000, n_record=500, n_save=1000, n_evaluate=10000, n_iter_evaluation=1000):
     sum_score = 0
     sum_iter = 0
@@ -73,15 +78,6 @@ def train(env, agent, n_iter=100000, n_record=500, n_save=1000, n_evaluate=10000
     # plt.plot(range(n_evaluate, n_iter+1, n_evaluate), eval_iter_plt, color='red')
     plt.show()
     evaluate(env, agent)
-
-
-# Import your agent
-from agents import DiscreteAgentV2_1, TrainerV2_1
-from agents import DiscreteAgentV2_2, TrainerV2_2
-from agents import DiscreteAgentV2, TrainerV2
-from agents import DiscreteAgentV2_3, TrainerV2_3
-from agents import DiscreteAgentV2_4, TrainerV2_4
-from agents import DiscreteAgentR, TrainerR
 
 
 if __name__ == "__main__":
