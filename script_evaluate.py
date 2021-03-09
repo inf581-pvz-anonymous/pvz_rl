@@ -14,9 +14,9 @@ import matplotlib.pyplot as plt
 from agents import evaluate, PlayerV2, ReinforceAgentV2
 from agents import QNetwork, PlayerQ
 from agents import QNetwork_DQN
-from agents import ACAgent, TrainerAC
+from agents import ACAgent3, TrainerAC3
 
-agent_type = "DDQN" # DDQN or Reinforce or Keyboard
+agent_type = "DDQN" # DDQN or Reinforce or AC or Keyboard
 
 
 if __name__ == "__main__":
@@ -30,8 +30,8 @@ if __name__ == "__main__":
         agent.load("agents/agent_zoo/dfp5")
          
     if agent_type == "AC":
-        env = TrainerAC(render=False, max_frames = 500*config.FPS)
-        agent = ACAgent(
+        env = TrainerAC3(render=False, max_frames = 500*config.FPS)
+        agent = ACAgent3(
                 input_size=env.num_observations(),
                 possible_actions=env.get_actions()
         )
