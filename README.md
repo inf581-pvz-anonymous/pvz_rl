@@ -30,6 +30,8 @@ python game_render.py
 
 ## Usage example
 
+Here we will guide you to train an agent from scratch. However, since the training can be fairly long depending on your machine (more than 30 minuts if the agent performs well), you can skip the training section (you then do not have to modify any of the code which will then use a pretrained agent from our agent zoo).
+
 ### Train an agent
 
 To train a DDQN agent
@@ -44,6 +46,7 @@ Once the agent is trained, for DDQN agent, you can plot the learning curves with
 ```
 python plot_training_ddqn.py NAME
 ```
+In red is the performances of the agent evaluated by removing the epislon-greedy policy used for training and using a greedy policy instead (i.e. epsilon=0).
 
 ### Evaluate the agent
 To evaluate your newly trained agent, you'll have to modify the script_evaluate.py file in the following way. Change the agent_type variable in accordance to the trained agent (e.g "DDQN") and then replace the loaded path by the chosen "NAME" in the corresponding if clause in the main function.
@@ -51,8 +54,17 @@ To evaluate your newly trained agent, you'll have to modify the script_evaluate.
 ```
 python script_evaluate.py
 ```
+1000 plays will be run with your agent and you will then see in order: histogram distribution of the score, histogram distribution of the survived frames, histogram distribution of the actions used, histogram distribution of the plant used.
+
 
 ### Visualize a play
-Similarly 
+Similarly you can modify game_render.py to use your own agent, doing the exact same modifications as above and run
+```
+python game_render.py
+```
 
 ### Feature importance
+You can compute SHAP values if you used a DDQN agent by setting the loaded path to the chosen "NAME" in script_feature_importance.py and then run:
+```
+python script_feature_importance.py
+```
