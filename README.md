@@ -19,6 +19,7 @@ pip install -e .
 cd ..
 cd gym-pvz
 pip install -e .
+cd ..
 ```
 
 Everything related to the game balance and FPS configuration is in the pvz library we developped. In particular, config.py, entities/zombies.WaveZombieSpawner.py and the main files containing balance data. For plant and zombie characteristics, check the files in the entities/plants/ and entities/zombies/ folders.
