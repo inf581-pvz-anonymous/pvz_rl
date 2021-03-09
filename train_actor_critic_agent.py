@@ -64,12 +64,12 @@ def train(env, agent, n_iter=100000, n_record=500, n_save=1000):
 
 
 # Import your agent
-from agents import ACAgent, TrainerAC
+from agents import ACAgent3, TrainerAC3
 
 if __name__ == "__main__":
 
-    env = TrainerAC(render=False,max_frames = 400)
-    agent = ACAgent(
+    env = TrainerAC3(render=False,max_frames = 400)
+    agent = ACAgent3(
         input_size = env.num_observations(),
         possible_actions=env.get_actions()
     )
