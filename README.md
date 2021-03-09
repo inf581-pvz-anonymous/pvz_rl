@@ -64,6 +64,8 @@ Similarly you can modify game_render.py to use your own agent, doing the exact s
 python game_render.py
 ```
 
+To visualize a game with higher FPS (more fluid motions), change the FPS variable in pvz/pvz/config.py. This may have a slight impact on the behavior of some agents.
+
 ### Feature importance
 You can compute SHAP values if you used a DDQN agent by setting the loaded path to the chosen "NAME" in script_feature_importance.py and then run:
 ```
