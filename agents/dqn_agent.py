@@ -127,7 +127,7 @@ class DQNAgent:
         self.window = 100
         self.reward_threshold = 30000
         self.initialize()
-        self.player = PlayerQ(env = env, render=False)
+        self.player = PlayerQ_DQN(env = env, render=False)
         
 
     def take_step(self, mode='train'):
@@ -336,7 +336,7 @@ class experienceReplayBuffer_DQN:
         return len(self.replay_memory) / self.burn_in
 
 
-class PlayerQ():
+class PlayerQ_DQN():
     def __init__(self, env = None, render=True):
         if env==None:
             self.env = gym.make('gym_pvz:pvz-env-v2')
