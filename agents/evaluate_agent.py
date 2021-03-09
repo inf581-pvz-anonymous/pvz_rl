@@ -45,18 +45,18 @@ def evaluate(env, agent, n_iter=1000, verbose = True):
     if verbose:
         # Plot of the score
         plt.hist(score_hist)
-        plt.title("Score per play over {} plays".format(n_iter)
+        plt.title("Score per play over {} plays".format(n_iter))
         plt.show()
         # Plot of the iterations
         plt.hist(iter_hist)
-        plt.title("Survived frames per play over {} plays".format(n_iter)
+        plt.title("Survived frames per play over {} plays".format(n_iter))
         plt.show()
         # Plot of the action
         plt.hist(np.concatenate(actions), np.arange(0, config.N_LANES * config.LANE_LENGTH * 4 + 2) -0.5, density=True)
-        plt.title("Action usage density over {} plays".format(n_iter)
+        plt.title("Action usage density over {} plays".format(n_iter))
         plt.show()
         plt.hist(plant_action, np.arange(0,5) - 0.5, density=True)
-        plt.title("Plant usage density over {} plays".format(n_iter)
+        plt.title("Plant usage density over {} plays".format(n_iter))
         plt.show()
 
     return sum_score/n_iter, sum_iter/n_iter
