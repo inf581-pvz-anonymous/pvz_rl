@@ -15,15 +15,26 @@ from agents import evaluate, PlayerV2, ReinforceAgentV2
 from agents import QNetwork, PlayerQ
 from agents import QNetwork_DQN
 
-if __name__=="__main__":
-#     player = TrainerV2(render=False, max_frames = 400)
-#     agent = DiscreteAgentV2(
-#              input_size=player.num_observations(),
-#              possible_actions=player.get_actions()
-#     )
-#     agent.load("agents/benchmark/dfp5")
-    player = PlayerQ(render=False)
-    agent = torch.load("agents/agent_zoo/dfq5_epsexp")
-    avg_score, avg_iter = evaluate(player, agent)
+agent_type = "DDQN" # DDQN or Reinforce or Keyboard
+
+
+if __name__ == "__main__":
+
+    if agent_type == "Reinforce":
+        env = PlayerV2(render=False, max_frames = 500 * config.FPS)
+        agent = ReinforceAgentV2(
+                input_size=env.num_observations(),
+                possible_actions=env.get_actions()
+        )
+        agent.load("agents/agent_zoo/dfp5")
+        
+    if agent_type == "DDQN":
+        env = PlayerQ(render=False)
+        agent = torch.load("agents/agent_zoo/dfq5_epsexp")
+    
+    if agent_type == "Keyboard":
+        env = PlayerV2(render=True, max_frames = 500*config.FPS)
+        agent = KeyboardAgent()
+    avg_score, avg_iter = evaluate(env, agent)
     print("\nMean score {}".format(avg_score))
     print("Mean iterations {}".format(avg_iter))
