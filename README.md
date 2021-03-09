@@ -23,6 +23,11 @@ pip install -e .
 
 Everything related to the game balance and FPS configuration is in the pvz library we developped. In particular, config.py, entities/zombies.WaveZombieSpawner.py and the main files containing balance data. For plant and zombie characteristics, check the files in the entities/plants/ and entities/zombies/ folders.
 
+You can test your installation by running the following lines and watch our trained DDQN in action.
+```
+python game_render.py
+```
+
 ## Usage example
 
 ### Train an agent
@@ -48,5 +53,6 @@ python script_evaluate.py
 ```
 
 ### Visualize a play
+Similarly 
 
 ### Feature importance
