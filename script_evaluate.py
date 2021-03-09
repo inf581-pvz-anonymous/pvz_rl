@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 from agents import evaluate, PlayerV2, ReinforceAgentV2
 from agents import QNetwork, PlayerQ
-from agents import QNetwork_DQN
+from agents import QNetwork_DQN, PlayerQ_DQN
 from agents import ACAgent3, TrainerAC3
 
 agent_type = "DDQN" # DDQN or Reinforce or AC or Keyboard
@@ -40,6 +40,10 @@ if __name__ == "__main__":
     if agent_type == "DDQN":
         env = PlayerQ(render=False)
         agent = torch.load("agents/agent_zoo/dfq5_epsexp")
+    
+    if agent_type == "DQN":
+        env = PlayerQ_DQN(render=False)
+        agent = torch.load("agents/agent_zoo/dfq5_dqn")
     
     if agent_type == "Keyboard":
         env = PlayerV2(render=True, max_frames = 500*config.FPS)
