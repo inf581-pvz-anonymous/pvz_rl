@@ -105,7 +105,7 @@ def render(render_info):
         # Did the user click the window close button?
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                render_info = []
         
         
         
