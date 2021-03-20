@@ -58,10 +58,11 @@ python script_evaluate.py
 
 
 ### Visualize a play
-Similarly you can modify game_render.py to use your own agent, doing the exact same modifications as above and run
+With the following, you can visualize a game of an agent.
 ```
 python game_render.py
 ```
+By default, this will show the behavior of the DDQN agent. You can modify agent_type in game_render.py to use some other saved agents or even your own agent (doing the exact same modifications as above)
 
 To visualize a game with higher FPS (more fluid motions), change the FPS variable in pvz/pvz/config.py. This may have a slight impact on the behavior of some agents.
 
