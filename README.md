@@ -7,8 +7,8 @@ The following python libraries are required: pytorch, gym, pygame (and shap to e
 
 ## Installation/Setup
 
-The game engine we developped and the Open AI gym environment are both encapsulated in python libraries.
-The easier way to run our code is to use the command prompt (at least in windows or linux).
+The game engine we developed and the Open AI gym environment are both encapsulated in python libraries.
+The easiest way to run our code is to use the command prompt (at least in windows or linux).
 
 ```
 git clone https://github.com/inf581-pvz-anonymous/pvz_rl.git
@@ -21,7 +21,7 @@ pip install -e .
 cd ..
 ```
 
-Everything related to the game balance and FPS configuration is in the pvz library we developped. In particular, config.py, entities/zombies.WaveZombieSpawner.py and the main files containing balance data. For plant and zombie characteristics, check the files in the entities/plants/ and entities/zombies/ folders.
+Everything related to the game balance and FPS configuration is in the pvz library we developed. In particular, config.py, entities/zombies.WaveZombieSpawner.py and the main files containing balance data. For plant and zombie characteristics, check the files in the entities/plants/ and entities/zombies/ folders.
 
 You can test your installation by running the following lines and watch our trained DDQN in action.
 ```
@@ -30,7 +30,7 @@ python game_render.py
 
 ## Usage example
 
-Here we will guide you to train an agent from scratch. However, since the training can be fairly long depending on your machine (more than 30 minuts if the agent performs well), you can skip the training section (you then do not have to modify any of the code which will then use a pretrained agent from our agent zoo).
+Here we will guide you to train an agent from scratch. However, since the training can be fairly long depending on your machine (more than 30 minutes if the agent performs well), you can skip the training section (you then do not have to modify any of the code which will then use a pretrained agent from our agent zoo).
 
 ### Train an agent
 
