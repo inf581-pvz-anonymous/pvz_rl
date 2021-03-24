@@ -1,6 +1,7 @@
 from agents import ReinforceAgentV2, PolicyNetV2, PlayerV2
 from agents import KeyboardAgent
 from agents import PlayerQ, QNetwork, QNetwork_DQN
+from agents import ACAgent3, TrainerAC3
 from pvz import config
 import gym
 import torch
@@ -113,7 +114,7 @@ def render(render_info):
 
     pygame.quit()
 
-agent_type = "DDQN" # DDQN or Reinforce or Keyboard
+agent_type = "DDQN" # DDQN or Reinforce or AC or Keyboard
 
 
 if __name__ == "__main__":
@@ -129,6 +130,14 @@ if __name__ == "__main__":
     if agent_type == "DDQN":
         env = PlayerQ(render=False)
         agent = torch.load("agents/agent_zoo/dfq5_epsexp")
+        
+    if agent_type == "AC":
+        env = TrainerAC3(render=False, max_frames = 500*config.FPS)
+        agent = ACAgent3(
+                input_size=env.num_observations(),
+                possible_actions=env.get_actions()
+        )
+        agent.load("agents/agent_zoo/ac_policy_v1", "agents/agent_zoo/ac_value_v1")
     
     if agent_type == "Keyboard":
         env = PlayerV2(render=True, max_frames = 500*config.FPS)
